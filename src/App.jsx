@@ -29,7 +29,6 @@ function App() {
     <Router>
       <Navbar />
       <Routes>
-        <Route path="/home" element={<Hero />} />
         <Route
           path="/"
           element={
