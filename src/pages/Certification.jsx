@@ -48,7 +48,7 @@ const certifications = [
   {
     title: "Innovillage 2023",
     issuer: "Telkom Indonesia",
-    date: "Aug 2022",
+    date: "Feb 2024",
     image: cert6,
     link: "https://drive.google.com/file/d/1_V5lKdy9PQD91TIxrieuzi_lXerhdto0/view?usp=sharing",
   },
