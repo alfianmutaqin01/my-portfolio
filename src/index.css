@@ -1,3 +1,7 @@
+/* src/index.css */
+@import "bootstrap/dist/css/bootstrap.min.css";
+/* Custom font import (jika ingin pakai Poppins) */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -69,8 +73,7 @@ button:focus-visible {
   }
 }
 
-/* src/index.css */
-@import "bootstrap/dist/css/bootstrap.min.css";
+
 
 /* Styling Global */
 body {
@@ -158,8 +161,7 @@ body {
     100% { transform: rotate(360deg); }
 }
 
-/* Custom font import (jika ingin pakai Poppins) */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
 
 .card-hover {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
