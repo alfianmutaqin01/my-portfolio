@@ -22,12 +22,14 @@ a:hover {
   color: #535bf2;
 }
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+.custom-hover:hover {
+  background-color: #ffc107 !important; 
+  border-color: #ffc107 !important;
+  transition: all 0.3s ease;
+}
+
+.custom-rounded {
+  border-radius: 25px !important;
 }
 
 h1 {
@@ -66,3 +68,93 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+/* src/index.css */
+@import "bootstrap/dist/css/bootstrap.min.css";
+
+/* Styling Global */
+body {
+    font-family: 'Poppins', sans-serif; 
+    overflow-x: hidden; 
+}
+
+/* Hero Section Styling */
+.hero-section {
+    background-color: #1a1a1a; /* Pastikan latar belakang gelap */
+    position: relative;
+    overflow: hidden; /* Untuk menjaga elemen dekoratif di dalam section */
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(30, 30, 30, 0.8), rgba(60, 60, 60, 0.8)); /* Contoh gradient */
+    z-index: 0;
+}
+
+
+/* Custom styling for profile image border */
+.hero-profile-img {
+  border-color: #007bff !important; /* Warna border primary Bootstrap */
+  box-shadow: 0 0 15px rgba(0, 123, 255, 0.5); /* Efek glow */
+}
+
+/* Social Icons Hover Effect */
+.social-icons a {
+    transition: transform 0.3s ease-in-out;
+}
+.social-icons a:hover {
+    transform: translateY(-5px); /* Sedikit naik saat hover */
+    color: #007bff !important; /* Ubah warna saat hover */
+}
+
+/* Efek Latar Belakang dan Dekorasi (inspirasi dari Xolio) */
+/* Ini adalah contoh, Anda mungkin perlu aset gambar/SVG untuk replika yang persis */
+.hero-bg-overlay {
+    background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"%3E%3Ccircle cx="50" cy="50" r="40" fill="%232c2c2c" opacity="0.3"/%3E%3C/svg%3E'); /* Contoh SVG background */
+    background-repeat: repeat;
+    opacity: 0.1;
+    z-index: 0;
+}
+
+.hero-deco-1 {
+    width: 100px;
+    height: 100px;
+    background-color: #ffc107; /* Warna kuning Bootstrap */
+    border-radius: 50%;
+    top: 10%;
+    right: 15%;
+    opacity: 0.2;
+    filter: blur(30px);
+    animation: floatEffect 5s ease-in-out infinite;
+}
+
+.hero-deco-2 {
+    width: 150px;
+    height: 150px;
+    background-color: #6f42c1; /* Warna ungu Bootstrap */
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%); /* Bentuk segitiga */
+    bottom: 5%;
+    left: 10%;
+    opacity: 0.15;
+    filter: blur(25px);
+    animation: rotateEffect 7s linear infinite;
+}
+
+@keyframes floatEffect {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0); }
+}
+
+@keyframes rotateEffect {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Custom font import (jika ingin pakai Poppins) */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
