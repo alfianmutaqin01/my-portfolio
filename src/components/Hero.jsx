@@ -61,30 +61,37 @@ const combinedExperience = [
     ],
   },
   {
-    section: "Organizational & Committee Experience",
+    section: "Organizational & Volunteer Experience",
     subtitle:
-      "Weaving stories of leadership and team collaboration in a variety of exciting experiences.",
+      "Empowering communities and leading creative initiatives through collaboration, innovation, and social impact.",
     entries: [
       {
-        date: "Feb 2023 – Sekarang",
-        place: "Himpunan Mahasiswa Software Engineering IT Telkom Purwokerto",
-        role: "Staf Divisi Media dan Informasi",
+        date: "Feb 2023 – Dec 2024",
+        place: "Himpunan Mahasiswa Software Engineering – Telkom University",
+        role: "Head of Creative Economy Department",
         description:
-          "Bertanggung jawab atas pembuatan lebih dari 40 sertifikat kegiatan, dokumentasi acara, serta publikasi konten visual di media sosial. Terampil menggunakan Canva dan Figma. Aktif berkolaborasi dengan tim lintas divisi untuk mendukung aktivitas himpunan.",
+          "Spearheaded the Creative Economy Division to oversee financial initiatives and channel student creativity into impactful outputs. Managed fundraising programs, digital product monetization, and merchandise planning. Facilitated collaborations to transform ideas into tangible media using tools like Canva and Figma, while supporting the organization's financial sustainability.",
       },
       {
-        date: "Jun 2023",
-        place: "Pemilu Fakultas Informatika IT Telkom Purwokerto",
-        role: "Staf Divisi Sistem Informasi",
+        date: "Dec 2023 – Dec 2024",
+        place: "Satria Muda – Telkom University",
+        role: "Entrepreneurship Mentor",
         description:
-          "Bertugas dalam pengelolaan data peserta dan pengiriman email massal yang berisi informasi kredensial pemilih. Berperan dalam pengembangan sistem informasi untuk mendukung digitalisasi proses pemilu internal kampus.",
+          "Mentored student entrepreneurs in business planning, branding, and digital marketing strategy. Provided one-on-one coaching, evaluated business proposals, and helped participants refine their pitch decks for real-world application.",
       },
       {
-        date: "Agst 2020 – Jun 2021",
-        place: "Stematel Computer Club SMK Telkom Purwokerto",
-        role: "Staf Divisi Web Design & Presentasi",
+        date: "Oct 2024",
+        place: "Precompetition IBCF – Telkom University",
+        role: "Event Chair",
         description:
-          "Membuat kurikulum pelatihan internal dan mengajar anggota klub tentang desain web menggunakan HTML, CSS, JavaScript, serta alat desain seperti Figma. Membimbing pembuatan proyek akhir dan memberikan evaluasi berbasis praktik langsung.",
+          "Spearheaded the planning and execution of a campus-wide precompetition event for IBCF. Managed over 20 team members, scheduled competition logistics, secured sponsors, and ensured a smooth, impactful experience for all participants.",
+      },
+      {
+        date: "Apr 28 – May 5, 2024",
+        place: "FLS2N (Banyumas & Purbalingga Region)",
+        role: "Volunteer Coordinator",
+        description:
+          "Coordinated volunteers during the National Student Art Festival (FLS2N) regional stage. Oversaw registration, venue setup, technical support, and ensured seamless communication among participants, judges, and committees.",
       },
     ],
   },
@@ -217,100 +224,108 @@ function Hero() {
             ))}
           </div>
         </section>
+        <br />
 
-        <div className="container text-center">
-          <p className="text-primary fw-bold mb-2">Topics of Interest</p>
-          <h5 className="fw-bold mb-5">
-            Empowering communities with user-friendly and purposeful digital
-            solutions.
-          </h5>
-          <div className="row">
-            {/* Card 1: Front-end Development */}
-            <div className="col-md-4 mb-4">
-              <div className="border rounded-4 p-4 shadow-sm h-100 bg-dark text-white">
-                <div className="mb-3">
-                  <i className="bi bi-code-slash fs-1 text-primary"></i>
-                </div>
-                <h5 className="fw-bold">Front-end Development</h5>
-                <p className="text-light">
-                  Building responsive and interactive web interfaces with clean
-                  code and optimized performance.
-                </p>
-              </div>
+        <section>
+          <div className="container text-center">
+            <div className="text-center mb-5">
+              <p className="text-primary fw-semibold mb-2 text-uppercase">
+                Topics of Interest
+              </p>
+              <h2 className="fw-bold">
+                User-Friendly and Purposeful Digital solutions.
+              </h2>
             </div>
 
-            {/* Card 2: Back-end Development */}
-            <div className="col-md-4 mb-4">
-              <div className="border rounded-4 p-4 shadow-sm h-100 bg-dark text-white">
-                <div className="mb-3">
-                  <i className="bi bi-hdd-stack fs-1 text-primary"></i>
+            <div className="row">
+              {/* Card 1: Front-end Development */}
+              <div className="col-md-4 mb-4">
+                <div className="border rounded-4 p-4 shadow-sm h-100 bg-dark text-white">
+                  <div className="mb-3">
+                    <i className="bi bi-code-slash fs-1 text-primary"></i>
+                  </div>
+                  <h5 className="fw-bold">Front-end Development</h5>
+                  <p className="text-light">
+                    Building responsive and interactive web interfaces with
+                    clean code and optimized performance.
+                  </p>
                 </div>
-                <h5 className="fw-bold">Back-end Development</h5>
-                <p className="text-light">
-                  Creating robust server-side logic and database systems that
-                  support scalable applications.
-                </p>
               </div>
-            </div>
 
-            {/* Card 3: UI/UX Design */}
-            <div className="col-md-4 mb-4">
-              <div className="border rounded-4 p-4 shadow-sm h-100 bg-dark text-white">
-                <div className="mb-3">
-                  <i className="bi bi-palette fs-1 text-primary"></i>
+              {/* Card 2: Back-end Development */}
+              <div className="col-md-4 mb-4">
+                <div className="border rounded-4 p-4 shadow-sm h-100 bg-dark text-white">
+                  <div className="mb-3">
+                    <i className="bi bi-hdd-stack fs-1 text-primary"></i>
+                  </div>
+                  <h5 className="fw-bold">Back-end Development</h5>
+                  <p className="text-light">
+                    Creating robust server-side logic and database systems that
+                    support scalable applications.
+                  </p>
                 </div>
-                <h5 className="fw-bold">UI/UX Design</h5>
-                <p className="text-light">
-                  Creating seamless user experiences with attention to usability
-                  and aesthetic clarity.
-                </p>
               </div>
-            </div>
 
-            {/* Card 4: System Administration */}
-            <div className="col-md-4 mb-4">
-              <div className="border rounded-4 p-4 shadow-sm h-100 bg-dark text-white">
-                <div className="mb-3">
-                  <i className="bi bi-gear fs-1 text-primary"></i>
+              {/* Card 3: UI/UX Design */}
+              <div className="col-md-4 mb-4">
+                <div className="border rounded-4 p-4 shadow-sm h-100 bg-dark text-white">
+                  <div className="mb-3">
+                    <i className="bi bi-palette fs-1 text-primary"></i>
+                  </div>
+                  <h5 className="fw-bold">UI/UX Design</h5>
+                  <p className="text-light">
+                    Creating seamless user experiences with attention to
+                    usability and aesthetic clarity.
+                  </p>
                 </div>
-                <h5 className="fw-bold">System Administration</h5>
-                <p className="text-light">
-                  Managing administrative workflows and digital documentation
-                  for efficiency.
-                </p>
               </div>
-            </div>
 
-            {/* Card 5: Writing & Content */}
-            <div className="col-md-4 mb-4">
-              <div className="border rounded-4 p-4 shadow-sm h-100 bg-dark text-white">
-                <div className="mb-3">
-                  <i className="bi bi-pen fs-1 text-primary"></i>
+              {/* Card 4: System Administration */}
+              <div className="col-md-4 mb-4">
+                <div className="border rounded-4 p-4 shadow-sm h-100 bg-dark text-white">
+                  <div className="mb-3">
+                    <i className="bi bi-gear fs-1 text-primary"></i>
+                  </div>
+                  <h5 className="fw-bold">System Administration</h5>
+                  <p className="text-light">
+                    Managing administrative workflows and digital documentation
+                    for efficiency.
+                  </p>
                 </div>
-                <h5 className="fw-bold">Writing & Content</h5>
-                <p className="text-light">
-                  Producing impactful educational content and concise writing
-                  for media and digital needs.
-                </p>
               </div>
-            </div>
 
-            {/* Card 6: Communication */}
-            <div className="col-md-4 mb-4">
-              <div className="border rounded-4 p-4 shadow-sm h-100 bg-dark text-white">
-                <div className="mb-3">
-                  <i className="bi bi-mic fs-1 text-primary"></i>
+              {/* Card 5: Writing & Content */}
+              <div className="col-md-4 mb-4">
+                <div className="border rounded-4 p-4 shadow-sm h-100 bg-dark text-white">
+                  <div className="mb-3">
+                    <i className="bi bi-pen fs-1 text-primary"></i>
+                  </div>
+                  <h5 className="fw-bold">Writing & Content</h5>
+                  <p className="text-light">
+                    Producing impactful educational content and concise writing
+                    for media and digital needs.
+                  </p>
                 </div>
-                <h5 className="fw-bold">Communication</h5>
-                <p className="text-light">
-                  Experienced in public speaking, mentoring, and team
-                  collaboration.
-                </p>
+              </div>
+
+              {/* Card 6: Communication */}
+              <div className="col-md-4 mb-4">
+                <div className="border rounded-4 p-4 shadow-sm h-100 bg-dark text-white">
+                  <div className="mb-3">
+                    <i className="bi bi-mic fs-1 text-primary"></i>
+                  </div>
+                  <h5 className="fw-bold">Communication</h5>
+                  <p className="text-light">
+                    Experienced in public speaking, mentoring, and team
+                    collaboration.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-
+        </section>
+        <br />
+        <br />
         <section className="bg-dark text-white py-5 px-3">
           <div className="container">
             {/* Education Header */}
@@ -356,7 +371,9 @@ function Hero() {
           <div className="container">
             {/* Title */}
             <div className="text-center mb-5">
-              <p className="text-warning fw-semibold mb-2">What I Achieve</p>
+              <p className="text-warning fw-semibold mb-2 text-uppercase">
+                What I Achieve
+              </p>
               <h2 className="fw-bold">Awards & Achievements</h2>
             </div>
 
@@ -384,11 +401,12 @@ function Hero() {
         <section className="bg-dark text-white py-5">
           <div className="container text-center">
             {/* Heading */}
-            <h2 className="fw-bold text-primary mb-3 display-5">Experience</h2>
-            <p className="text-light fs-5 mb-5">
-              A curated collection of roles and projects that shaped my
-              professional journey.
-            </p>
+            <div className="text-center mb-5">
+              <p className="text-primary fw-semibold mb-2 text-uppercase">
+                Experience
+              </p>
+              <h2 className="fw-bold">My Professional Journey</h2>
+            </div>
 
             {/* Cards */}
             <div className="row justify-content-center g-4">
@@ -471,39 +489,53 @@ function Hero() {
           </div>
         </section>
 
-        {/* Organizational & Committee Experience */}
         <section className="bg-dark text-white py-5">
           <div className="container">
             <div className="text-center mb-5">
-              <h2 className="fw-bold text-warning">
-                Organizational & Committee Experience
-              </h2>
-              <p className="text-white-50 fs-5">
-                Weaving stories of leadership and collaboration across impactful
-                organizations.
+              <p className="text-warning fw-semibold mb-2 text-uppercase">
+                Organizational & Volunteer Experience
               </p>
+              <h2 className="fw-bold">Leadership and Collaboration</h2>
             </div>
 
             <div className="d-flex flex-column gap-4">
               {combinedExperience[1].entries.map(
-                ({ date, place, role, description }, i) => (
-                  <div
-                    key={i}
-                    className="bg-secondary bg-opacity-10 p-4 rounded-3 border-start border-4 border-warning position-relative shadow-sm"
-                  >
-                    <span
-                      className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark d-none d-md-inline-block"
-                      style={{ top: "1rem", left: "auto" }}
+                ({ date, place, role, description }, i) => {
+                  const colors = [
+                    "warning",
+                    "info",
+                    "success",
+                    "primary",
+                    "danger",
+                  ];
+                  const color = colors[i % colors.length]; // urutkan bergantian
+
+                  return (
+                    <div
+                      key={i}
+                      className={`p-4 rounded-3 position-relative shadow-sm bg-opacity-10 bg-light border-start border-4 border-${color}`}
                     >
-                      Org
-                    </span>
-                    <div className="mb-1 small text-warning fw-semibold">
-                      {date} | {place}
+                      {/* Badge */}
+                      <span
+                        className={`position-absolute top-0 start-100 translate-middle badge rounded-pill bg-${color} text-dark d-none d-md-inline-block`}
+                        style={{ top: "1rem", left: "auto" }}
+                      >
+                        Org
+                      </span>
+
+                      {/* Meta info */}
+                      <div className={`mb-1 small fw-semibold text-${color}`}>
+                        {date} | {place}
+                      </div>
+
+                      {/* Title */}
+                      <h5 className="fw-semibold text-white mb-2">{role}</h5>
+
+                      {/* Description */}
+                      <p className="text-white-50 mb-0">{description}</p>
                     </div>
-                    <h5 className="fw-semibold text-white mb-2">{role}</h5>
-                    <p className="text-white-50 mb-0">{description}</p>
-                  </div>
-                )
+                  );
+                }
               )}
             </div>
           </div>
@@ -517,57 +549,5 @@ function Hero() {
     </section>
   );
 }
-<section className="bg-dark text-white py-5 px-3">
-  <div className="container">
-    {/* Education Section */}
-    <div className="mb-5">
-      <div className="text-center mb-4">
-        <p className="text-warning fw-semibold mb-2 text-uppercase">
-          Education
-        </p>
-        <h2 className="fw-bold mb-3">My Educational History</h2>
-        <p className="text-secondary">
-          My educational history and what I have learned.
-        </p>
-      </div>
-      <div className="row">
-        {educationData.map((edu, index) => (
-          <div className="col-12 mb-4" key={index}>
-            <div className="p-4 border-start border-4 border-primary">
-              <h6 className="text-primary mb-1">{edu.date}</h6>
-              <h5 className="fw-bold mb-1">{edu.institution}</h5>
-              <p className="fw-semibold mb-1">{edu.degree}</p>
-              <p className="text-secondary mb-0">{edu.details}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-
-    {/* Combined Experience Section */}
-    {combinedExperience.map((block, i) => (
-      <div className="mb-5" key={i}>
-        <div className="text-center mb-4">
-          <p className="text-warning fw-semibold mb-2 text-uppercase">
-            {block.section}
-          </p>
-          <h2 className="fw-bold mb-3">{block.subtitle}</h2>
-        </div>
-        <div className="row">
-          {block.entries.map((item, idx) => (
-            <div className="col-12 mb-4" key={idx}>
-              <div className="p-4 border-start border-4 border-primary">
-                <h6 className="text-primary mb-1">{item.date}</h6>
-                <h5 className="fw-bold mb-1">{item.place}</h5>
-                <p className="fw-semibold mb-1">{item.role}</p>
-                <p className="text-secondary mb-0">{item.description}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    ))}
-  </div>
-</section>;
 
 export default Hero;

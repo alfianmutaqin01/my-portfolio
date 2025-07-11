@@ -1,0 +1,32 @@
+.project-card {
+  transition: all 0.3s ease-in-out;
+  position: relative;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
+}
+
+.project-card img {
+  object-fit: cover;
+  height: 100%;
+  border-radius: 1rem;
+}
+
+.project-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(5px);
+  color: white;
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+  border-radius: 0 0 1rem 1rem;
+}
+
+.project-card:hover .project-overlay {
+  opacity: 1;
+}
