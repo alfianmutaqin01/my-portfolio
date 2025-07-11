@@ -6,7 +6,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
-import About from "./components/About";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import Skill from "./pages/Skill";
@@ -36,7 +35,6 @@ function App() {
           element={
             <>
               <Hero />
-              <About />
               <Contact />
             </>
           }
