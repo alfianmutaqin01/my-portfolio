@@ -324,7 +324,7 @@ function Hero() {
                 />
               </div>
               <div className="col-md-6 text-md-start text-center">
-                <p className="text-warning fw-semibold mb-2 text-uppercase">
+                <p className="text-danger fw-semibold mb-2 text-uppercase">
                   Education
                 </p>
                 <h2 className="fw-bold mb-3">My Educational History</h2>
@@ -338,8 +338,8 @@ function Hero() {
             <div className="row">
               {educationData.map((edu, index) => (
                 <div className="col-12 mb-5" key={index}>
-                  <div className="p-4 border-start border-4 border-warning bg-secondary bg-opacity-10 rounded shadow-sm">
-                    <h6 className="text-warning mb-1">{edu.date}</h6>
+                  <div className="p-4 border-start border-4 border-danger bg-secondary bg-opacity-10 rounded shadow-sm">
+                    <h6 className="text-danger mb-1">{edu.date}</h6>
                     <h5 className="fw-bold text-white">{edu.institution}</h5>
                     <p className="mb-1 fw-semibold text-white-50">
                       {edu.degree}
