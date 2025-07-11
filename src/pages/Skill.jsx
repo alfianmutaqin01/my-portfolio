@@ -1,5 +1,14 @@
 import techStack from '../data/techStack';
-function Services() {
+import { useEffect } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
+
+function Skill() {
+    useEffect(() => {
+  AOS.init({ once: true, duration: 800 });
+}, []);
+
   return (
     <section className="bg-xolio-dark text-white py-5">
       <div className="container">
@@ -23,7 +32,7 @@ function Services() {
                   style={{ height: '40px', marginBottom: '15px' }}
                 />
                 <h5 className="fw-bold mb-2">{tech.name}</h5>
-                <p className="text-muted small">
+                <p className="text-secondary small">
                   Mastering {tech.name} helps me craft elegant solutions, intuitive
                   interfaces, and reliable systems in real-world projects.
                 </p>
@@ -36,4 +45,4 @@ function Services() {
   );
 }
 
-export default Services;
+export default Skill;

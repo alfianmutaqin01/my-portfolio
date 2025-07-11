@@ -2,7 +2,7 @@ import { useState } from 'react'
 import React, { useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 
 import Navbar from './components/Navbar';
@@ -11,7 +11,7 @@ import About from './components/About';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-import Services from './components/Services';
+import Skill from './pages/Skill';
 import './App.css'
 
 function App() {
@@ -21,16 +21,24 @@ function App() {
       duration: 800,
     });
   }, []);
+
   return (
-    <>
+    <Router>
       <Navbar />
-      <Hero />
-      <Services />
-      <About />
-      <Projects />
-      <Contact />
+      <Routes>
+        <Route path="/home" element={<Hero />} />
+        <Route path="/" element={ <>
+              <Hero />
+              <About />
+              <Projects />
+              <Contact />
+            </>
+          }
+        />
+        <Route path="/skills" element={<Skill />} />
+      </Routes>
       <Footer />
-    </>
+    </Router>
   );
 }
 
