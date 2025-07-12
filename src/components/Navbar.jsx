@@ -11,14 +11,13 @@ function Navbar() {
       }}
     >
       <div className="container">
-        <a href="#home">
+        <Link to="/home" className="nav-link d-flex align-items-center gap-2">
           <img
             src={heroImg}
             alt="Name"
-            className="img"
             style={{ width: "75px", height: "30px" }}
           />
-        </a>
+        </Link>
         <button
           className="navbar-toggler"
           type="button"

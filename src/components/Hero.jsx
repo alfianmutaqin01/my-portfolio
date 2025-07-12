@@ -105,8 +105,7 @@ const achievementData = [
   },
   {
     title: "Innovillage 2023",
-    description:
-      "Funding of social innovation program by Telkom Indonesia.",
+    description: "Funding of social innovation program by Telkom Indonesia.",
     icon: "innovillage.png",
   },
   {
@@ -116,8 +115,7 @@ const achievementData = [
   },
   {
     title: "PKM 2023",
-    description:
-      "Participant to National Student Creativity Program (PKM).",
+    description: "Participant to National Student Creativity Program (PKM).",
     icon: "pkm.png",
   },
 ];
@@ -373,6 +371,8 @@ function Hero() {
           <div className="container">
             {/* Title */}
             <div className="text-center mb-5">
+              <i className="bi bi-award fs-1 text-warning animate__animated animate__heartBeat animate__infinite"></i>
+
               <p className="text-warning fw-semibold mb-2 text-uppercase">
                 What I Achieve
               </p>
@@ -545,8 +545,11 @@ function Hero() {
       </div>
 
       {/* Decorative floating shapes ala Xolio (optional) */}
-      <span className="position-absolute top-0 start-50 translate-middle-x fs-1 text-primary opacity-25">
-        ★
+      <span
+        className="position-absolute bottom-0 end-0 text-warning fs-1 bounce-horizontal"
+        style={{ opacity: 0.3, pointerEvents: "none" }}
+      >
+        ✨
       </span>
     </section>
   );
