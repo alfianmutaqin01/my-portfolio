@@ -1,7 +1,6 @@
 import techStack from "../data/techStack";
 import heroImg from "../assets/profile.png";
 import kampus from "../assets/gedung-telu-1.webp";
-import awardIcon from "../assets/award.png";
 const icons = import.meta.glob("../assets/achievements/*", {
   eager: true,
   as: "url",

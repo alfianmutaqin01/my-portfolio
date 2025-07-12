@@ -2,7 +2,12 @@ import { useState } from "react";
 import React, { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
@@ -26,18 +31,11 @@ function App() {
   }, []);
 
   return (
-    <Router>
+    <Router basename="/my-portfolio">
       <Navbar />
       <Routes>
-        <Route
-          path="/"
-          element={
-            <>
-              <Hero />
-              <Contact />
-            </>
-          }
-        />
+        <Route path="/" element={<Navigate to="/home" />} />
+        <Route path="/home" element={<Hero />} />
         <Route path="/projects" element={<Project />} />
         <Route path="/skills" element={<Skill />} />
         <Route path="/certification" element={<Certification />} />
