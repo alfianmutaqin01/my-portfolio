@@ -11,11 +11,11 @@ import {
 
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
-import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import Skill from "./pages/Skill";
 import Project from "./pages/Project";
 import Certification from "./pages/Certification";
+import Contact from "./pages/Contact";
 import "./App.css";
 
 function App() {
@@ -39,6 +39,7 @@ function App() {
         <Route path="/projects" element={<Project />} />
         <Route path="/skills" element={<Skill />} />
         <Route path="/certification" element={<Certification />} />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
       <Footer />
     </Router>

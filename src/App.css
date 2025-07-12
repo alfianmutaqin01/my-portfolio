@@ -102,3 +102,22 @@
   border-color: #0d6efd;
   color: #fff;
 }
+
+.tech-marquee {
+  animation: scrollLeft 50s linear infinite;
+  width: max-content;
+}
+
+@keyframes scrollLeft {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.tech-marquee:hover {
+  animation-play-state: paused;
+  cursor: grab;
+}

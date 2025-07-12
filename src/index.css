@@ -1,5 +1,6 @@
 /* src/index.css */
 @import "bootstrap/dist/css/bootstrap.min.css";
+
 /* Custom font import (jika ingin pakai Poppins) */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 :root {

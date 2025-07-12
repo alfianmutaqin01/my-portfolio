@@ -1,0 +1,19 @@
+.contact-section input,
+.contact-section textarea {
+  background-color: #2a2a2a;
+  color: #fff;
+  border: 1px solid #444;
+}
+
+.contact-section input::placeholder,
+.contact-section textarea::placeholder {
+  color: #bbb;
+}
+
+.contact-section input:focus,
+.contact-section textarea:focus {
+  border-color: #ffc107;
+  background-color: #222;
+  outline: none;
+  box-shadow: none;
+}

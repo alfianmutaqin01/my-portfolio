@@ -106,7 +106,7 @@ const achievementData = [
   {
     title: "Innovillage 2023",
     description:
-      "Participant of social innovation program by Telkom Indonesia.",
+      "Funding of social innovation program by Telkom Indonesia.",
     icon: "innovillage.png",
   },
   {
@@ -117,7 +117,7 @@ const achievementData = [
   {
     title: "PKM 2023",
     description:
-      "Submitted proposal to National Student Creativity Program (PKM).",
+      "Participant to National Student Creativity Program (PKM).",
     icon: "pkm.png",
   },
 ];
@@ -156,9 +156,9 @@ function Hero() {
             <div className="row align-items-center mb-4">
               <div className="col-auto">
                 <a
-                  href="/cv-alfian.pdf"
-                  className="btn btn-primary custom-hover px-4 py-3 custom-rounded fw-bold"
+                  href="/my-portfolio/CV_Alfian_Mutakim_TUP.pdf"
                   download
+                  className="btn btn-primary custom-hover px-4 py-3 custom-rounded fw-bold"
                 >
                   Download CV
                 </a>
@@ -207,22 +207,25 @@ function Hero() {
         <br />
         <br />
         <section className="bg-xolio-dark py-5">
-          <div className="container d-flex flex-wrap justify-content-center gap-4">
-            {techStack.slice(0, 5).map((tech, idx) => (
-              <div
-                key={idx}
-                className="bg-dark rounded-4 px-4 py-3 d-flex align-items-center justify-content-center shadow"
-                style={{ width: "160px", height: "80px" }}
-              >
-                <img
-                  src={tech.logo}
-                  alt={tech.name}
-                  style={{ height: "32px", maxWidth: "100%" }}
-                />
-              </div>
-            ))}
+          <div className="overflow-hidden" style={{ width: "100%" }}>
+            <div className="tech-marquee d-flex">
+              {[...techStack, ...techStack].map((tech, idx) => (
+                <div
+                  key={idx}
+                  className="bg-dark rounded-4 mx-3 px-4 py-3 d-flex align-items-center justify-content-center shadow"
+                  style={{ width: "160px", height: "80px", flex: "0 0 auto" }}
+                >
+                  <img
+                    src={tech.logo}
+                    alt={tech.name}
+                    style={{ height: "32px", maxWidth: "100%" }}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </section>
+
         <br />
 
         <section>
@@ -384,7 +387,7 @@ function Hero() {
                     <img
                       src={icons[`../assets/achievements/${item.icon}`]}
                       alt={item.title}
-                      style={{ height: "48px" }}
+                      style={{ height: "40px" }}
                       className="mb-3"
                     />
 

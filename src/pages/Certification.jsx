@@ -1,13 +1,22 @@
 import React, { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import "./Certification.css";
 import cert1 from "../assets/cert1.png";
 import cert2 from "../assets/cert2.png";
 import cert3 from "../assets/cert3.png";
 import cert4 from "../assets/cert4.png";
 import cert5 from "../assets/cert5.png";
 import cert6 from "../assets/cert6.png";
-import "./Certification.css";
+import cert7 from "../assets/cert7.png";
+import cert8 from "../assets/cert8.png";
+import cert9 from "../assets/cert9.png";
+import cert10 from "../assets/cert10.png";
+import cert11 from "../assets/cert11.png";
+import cert12 from "../assets/cert12.png";
+import cert13 from "../assets/cert13.png";
+import cert14 from "../assets/cert14.png";
+import cert15 from "../assets/cert15.png";
 
 const certifications = [
   {
@@ -51,6 +60,69 @@ const certifications = [
     date: "Feb 2024",
     image: cert6,
     link: "https://drive.google.com/file/d/1_V5lKdy9PQD91TIxrieuzi_lXerhdto0/view?usp=sharing",
+  },
+  {
+    title: "Asisten Praktikum Pemrograman 1",
+    issuer: "S1 Software Engineering",
+    date: "Jun 2024",
+    image: cert7,
+    link: "https://drive.google.com/file/d/1bBso-Di1CutyBfPlmIvCdZ8QHEWmZJVw/view?usp=sharing",
+  },
+  {
+    title: "Asisten Praktikum Sistem Operasi",
+    issuer: "S1 Sistem Informasi",
+    date: "Jan 2025",
+    image: cert8,
+    link: "https://drive.google.com/file/d/1lY-5ev4XjHpULqStc7NGy7YWAipAo21W/view?usp=sharing",
+  },
+  {
+    title: "Asisten Praktikum Web Dev",
+    issuer: "S1 Sistem Informasi",
+    date: "Mei 2025",
+    image: cert9,
+    link: "https://drive.google.com/file/d/1k7ssPoxVbthbPXbBMFHUr2rD3PchMy-j/view?usp=sharing",
+  },
+  {
+    title: "Intrenship HMSE Tel-U",
+    issuer: "Telkom University Purwokerto",
+    date: "Feb - Jun 2023",
+    image: cert10,
+    link: "https://drive.google.com/file/d/1YSX2eZ4EJi3twHFBiOLzAqm5l4jJi29q/view?usp=sharing",
+  },
+  {
+    title: "International Bandung Choral Festival",
+    issuer: "Bandung Choral Society",
+    date: "Nov 2023",
+    image: cert11,
+    link: "https://drive.google.com/file/d/1uZgO3Hbgi6yMmhLZ-lLl09HLE8bSlHq8/view?usp=sharing",
+  },
+  {
+    title: "ISEC 2023 Simbelmawa",
+    issuer: "Simbelmawa",
+    date: "Aug 2023",
+    image: cert12,
+    link: "https://drive.google.com/file/d/1ornCbWRPr4NPP7_t5G2Bfk6HhESLSQFE/view?usp=sharing",
+  },
+  {
+    title: "Ngoprek UI/UX HMSE",
+    issuer: "HMSE Tel-U Purwokerto",
+    date: "Apr - Mei 2023",
+    image: cert13,
+    link: "https://drive.google.com/file/d/13-SQvb-eYti80INGXPhaOZ-AwHWBeTIW/view?usp=sharing",
+  },
+  {
+    title: "Making A To do List Web",
+    issuer: "MySkill.id",
+    date: "Mar 2024",
+    image: cert14,
+    link: "https://drive.google.com/file/d/1oWgZ6VYKtP09OG55QmQ9zWPFYDSPYM87/view?usp=sharing",
+  },
+  {
+    title: "Devisi Acara Fls2n Kab. banyumas dan Kab. Purbalingga",
+    issuer: "Tel-u X Fls2n 2024",
+    date: "Mei 2024",
+    image: cert15,
+    link: "https://drive.google.com/file/d/1rkMJzmF_5yq_QXgEARzrU88-cjYYwGXI/view?usp=sharing",
   },
 ];
 
