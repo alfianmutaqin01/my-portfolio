@@ -40,9 +40,15 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          npx gh-pages --dist dist --nojekyll \
+          # Surface the error in the run summary if publishing fails
+          if ! npx gh-pages --dist dist --nojekyll \
             --repo "https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git" \
             --user "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>" \
-            --message "Deploy ${{ github.sha }}"
+            --message "Deploy ${{ github.sha }}" > publish.log 2>&1; then
+            cat publish.log
+            echo "::error title=Publish failed::$(tail -n 5 publish.log | tr '\n' ' ')"
+            exit 1
+          fi
+          cat publish.log
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
