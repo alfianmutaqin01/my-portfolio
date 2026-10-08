@@ -1,5 +1,4 @@
-import { useState } from "react";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import {
@@ -7,6 +6,7 @@ import {
   Routes,
   Route,
   Navigate,
+  useLocation,
 } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
@@ -18,6 +18,22 @@ import Certification from "./pages/Certification";
 import Contact from "./pages/Contact";
 import "./App.css";
 
+// Start each page at the top, or at the section named in the URL hash.
+function ScrollToTop() {
+  const { pathname, hash } = useLocation();
+
+  useEffect(() => {
+    const target = hash && document.getElementById(hash.slice(1));
+    if (target) {
+      target.scrollIntoView();
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [pathname, hash]);
+
+  return null;
+}
+
 function App() {
   useEffect(() => {
     AOS.init({
@@ -25,13 +41,10 @@ function App() {
       duration: 800,
     });
   }, []);
-  useEffect(() => {
-    document.body.classList.add("custom-cursor");
-    return () => document.body.classList.remove("custom-cursor");
-  }, []);
 
   return (
     <Router basename="/my-portfolio">
+      <ScrollToTop />
       <Navbar />
       <Routes>
         <Route path="/" element={<Navigate to="/home" />} />

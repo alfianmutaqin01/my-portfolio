@@ -1,557 +1,482 @@
+import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import techStack from "../data/techStack";
+import {
+  contact,
+  typedRoles,
+  stats,
+  services,
+  experiences,
+  education,
+  achievements,
+  organizations,
+} from "../data/profile";
 import heroImg from "../assets/profile.png";
 import kampus from "../assets/gedung-telu-1.webp";
-const icons = import.meta.glob("../assets/achievements/*", {
+import SectionHeading from "./SectionHeading";
+import { SoftSkillGrid, SoftSkillMarquee } from "./SoftSkills";
+import { Equalizer } from "./McGallery";
+import "./Hero.css";
+
+const achievementImages = import.meta.glob("../assets/achievements/*", {
   eager: true,
-  as: "url",
+  query: "?url",
+  import: "default",
 });
 
-const educationData = [
-  {
-    date: "Oktober 2022 – Sekarang",
-    institution: "Telkom University – Purwokerto, Indonesia",
-    degree: "S1 - Software Engineering, Faculty of Informatics",
-    details:
-      "Mendalami berbagai topik dalam rekayasa perangkat lunak modern, termasuk pemrograman berbasis web, pengujian perangkat lunak, manajemen proyek, dan desain antarmuka pengguna (UI/UX). Aktif sebagai asisten praktikum dan mentor program kewirausahaan. Berhasil mempertahankan IPK tinggi sambil terlibat aktif dalam organisasi dan berbagai ajang kompetisi nasional seperti PKM, P2MW, dan Innovillage.",
-  },
-  {
-    date: "Jul 2019 – Jun 2022",
-    institution: "SMK An-Nuur Boarding School",
-    degree: "Akuntansi",
-    details:
-      "Mempelajari dasar-dasar akuntansi keuangan, perpajakan, dan manajemen keuangan. Dilengkapi dengan pelatihan keterampilan teknis seperti pengelolaan laporan keuangan, aplikasi pembukuan digital, serta pemahaman etika bisnis dan komunikasi profesional. Menunjukkan kedisiplinan tinggi dalam lingkungan asrama dan aktif dalam kegiatan organisasi sekolah.",
-  },
+const cvUrl = `${import.meta.env.BASE_URL}CV_Alfian_Mutakim.pdf`;
+
+const socialLinks = [
+  { href: contact.linkedin, icon: "bi-linkedin", label: "LinkedIn" },
+  { href: contact.github, icon: "bi-github", label: "GitHub" },
+  { href: contact.instagram, icon: "bi-instagram", label: "Instagram" },
+  { href: contact.tiktok, icon: "bi-tiktok", label: "TikTok" },
 ];
 
-const combinedExperience = [
-  {
-    section: "Experience",
-    subtitle:
-      "Professional journey in administration, education, and public service.",
-    entries: [
-      {
-        date: "Feb 2024 – Present",
-        place: "Telkom University – Purwokerto",
-        role: "Laboratory Assistant – Software Engineering",
-        description:
-          "Assist lecturers in delivering practical classes by guiding students through technical exercises, diagnosing problems, and ensuring comprehension. Provide real-time support, feedback, and explanations on key software engineering topics.",
-      },
-      {
-        date: "Sep 2022 – Aug 2023",
-        place: "OSC Medcom.id",
-        role: "Educational Writer & Contributor",
-        description:
-          "Created informative and persuasive educational content. Conducted topic research and audience analysis to develop impactful material that addressed relevant and realistic issues in society and education.",
-      },
-      {
-        date: "Jun 2022 – Oct 2022",
-        place: "RM. Harmoni – Wonosobo",
-        role: "Finance Administrative Assistant",
-        description:
-          "Maintained daily financial records and monitored cash flow. Managed the documentation of financial files including invoices, contracts, and reports to ensure organizational clarity and accountability.",
-      },
-      {
-        date: "Jan 2021 – Mar 2021",
-        place: "Kantor Kelurahan Kalikajar – Wonosobo",
-        role: "Public Services Administrative Staff",
-        description:
-          "Contributed to efficient public service operations through data input, coordination of document flow, and citizen service. Ensured accurate information processing while maintaining data confidentiality and security.",
-      },
-    ],
-  },
-  {
-    section: "Organizational & Volunteer Experience",
-    subtitle:
-      "Empowering communities and leading creative initiatives through collaboration, innovation, and social impact.",
-    entries: [
-      {
-        date: "Feb 2023 – Dec 2024",
-        place: "Himpunan Mahasiswa Software Engineering – Telkom University",
-        role: "Head of Creative Economy Department",
-        description:
-          "Spearheaded the Creative Economy Division to oversee financial initiatives and channel student creativity into impactful outputs. Managed fundraising programs, digital product monetization, and merchandise planning. Facilitated collaborations to transform ideas into tangible media using tools like Canva and Figma, while supporting the organization's financial sustainability.",
-      },
-      {
-        date: "Dec 2023 – Dec 2024",
-        place: "Satria Muda – Telkom University",
-        role: "Entrepreneurship Mentor",
-        description:
-          "Mentored student entrepreneurs in business planning, branding, and digital marketing strategy. Provided one-on-one coaching, evaluated business proposals, and helped participants refine their pitch decks for real-world application.",
-      },
-      {
-        date: "Oct 2024",
-        place: "Precompetition IBCF – Telkom University",
-        role: "Event Chair",
-        description:
-          "Spearheaded the planning and execution of a campus-wide precompetition event for IBCF. Managed over 20 team members, scheduled competition logistics, secured sponsors, and ensured a smooth, impactful experience for all participants.",
-      },
-      {
-        date: "Apr 28 – May 5, 2024",
-        place: "FLS2N (Banyumas & Purbalingga Region)",
-        role: "Volunteer Coordinator",
-        description:
-          "Coordinated volunteers during the National Student Art Festival (FLS2N) regional stage. Oversaw registration, venue setup, technical support, and ensured seamless communication among participants, judges, and committees.",
-      },
-    ],
-  },
-];
+const prefersReducedMotion = () =>
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-const achievementData = [
-  {
-    title: "OSC Medcom.id Awardee",
-    description:
-      "Awardee of national scholarship competition held by Medcom.id.",
-    icon: "osc.png",
-  },
-  {
-    title: "Innovillage 2023",
-    description: "Funding of social innovation program by Telkom Indonesia.",
-    icon: "innovillage.png",
-  },
-  {
-    title: "P2MW & KMI Expo",
-    description: "Funded startup project and national expo participant.",
-    icon: "p2mw.png",
-  },
-  {
-    title: "PKM 2023",
-    description: "Participant to National Student Creativity Program (PKM).",
-    icon: "pkm.png",
-  },
-];
+// Types each word, pauses, deletes it, then moves to the next one.
+function useTypewriter(words, { typeSpeed = 80, deleteSpeed = 40, pause = 1800 } = {}) {
+  const [reduced] = useState(prefersReducedMotion);
+  const [index, setIndex] = useState(0);
+  const [text, setText] = useState("");
+  const [deleting, setDeleting] = useState(false);
+
+  useEffect(() => {
+    if (reduced) return;
+
+    const word = words[index];
+    const finishedTyping = !deleting && text === word;
+    const delay = finishedTyping ? pause : deleting ? deleteSpeed : typeSpeed;
+
+    const timer = setTimeout(() => {
+      if (finishedTyping) {
+        setDeleting(true);
+      } else if (deleting && text === "") {
+        setDeleting(false);
+        setIndex((index + 1) % words.length);
+      } else {
+        setText(word.slice(0, text.length + (deleting ? -1 : 1)));
+      }
+    }, delay);
+
+    return () => clearTimeout(timer);
+  }, [text, deleting, index, words, reduced, typeSpeed, deleteSpeed, pause]);
+
+  return reduced ? words[0] : text;
+}
+
+// Counts from 0 to `end` the first time the number scrolls into view.
+function CountUp({ end, decimals = 0, prefix = "", suffix = "", duration = 1500 }) {
+  const ref = useRef(null);
+  const [value, setValue] = useState(() => (prefersReducedMotion() ? end : 0));
+
+  useEffect(() => {
+    if (prefersReducedMotion()) return;
+
+    let frame;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        observer.disconnect();
+
+        const start = performance.now();
+        const tick = (now) => {
+          const progress = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          setValue(end * eased);
+          if (progress < 1) frame = requestAnimationFrame(tick);
+        };
+        frame = requestAnimationFrame(tick);
+      },
+      { threshold: 0.5 }
+    );
+
+    observer.observe(ref.current);
+    return () => {
+      observer.disconnect();
+      cancelAnimationFrame(frame);
+    };
+  }, [end, duration]);
+
+  return (
+    <span ref={ref}>
+      {prefix}
+      {value.toFixed(decimals)}
+      {suffix}
+    </span>
+  );
+}
 
 function Hero() {
+  const typedRole = useTypewriter(typedRoles);
+
   return (
-    <section
-      id="home"
-      className="bg-dark text-white py-5 position-relative overflow-hidden"
-    >
-      <div className="container">
-        {/* ---------- TOP : HEADLINE ---------- */}
-        <div className="row align-items-center g-5">
-          <div className="col-lg-6 text-center" data-aos="fade-left">
-            <img
-              src={heroImg}
-              alt="Alfian Mutakim"
-              className="img-fluid rounded-4 shadow-lg"
-              style={{ maxWidth: "80%" }}
-            />
-          </div>
-          {/* TEXT SIDE */}
-          <div className="col-lg-6 text-start" data-aos="fade-right">
-            <p className="text-warning fw-semibold mb-2">Hello, I'm</p>
-            <h1 className="display-4 fw-bold mb-3" style={{ color: "#845ef7" }}>
-              Alfian Mutakim
-            </h1>
+    <div className="home">
+      <span className="home-blob home-blob-1" aria-hidden="true"></span>
+      <span className="home-blob home-blob-2" aria-hidden="true"></span>
 
-            <p className="lead mb-4 text-light">
-              Software Engineering student at{" "}
-              <span className="text-danger fw-bold">Telkom University</span> who
-              combines coding, UI/UX design, and administrative expertise to
-              craft real‑world digital solutions.
-            </p>
+      {/* ---------- INTRO ---------- */}
+      <section id="home" className="py-5">
+        <div className="container">
+          <div className="row align-items-center g-5 py-lg-4">
+            <div className="col-lg-7 text-start" data-aos="fade-right">
+              <span className="status-badge mb-4">
+                <span className="status-dot"></span>
+                Currently a Web Developer at PT Berger Paints Indonesia
+              </span>
 
-            <div className="row align-items-center mb-4">
-              <div className="col-auto">
-                <a
-                  href="/my-portfolio/CV_Alfian_Mutakim_TUP.pdf"
-                  download
-                  className="btn btn-primary custom-hover px-4 py-3 custom-rounded fw-bold"
+              <p className="fs-5 fw-semibold mb-2">
+                Hi there <span className="wave">👋</span> I'm
+              </p>
+              <h1 className="hero-name display-3 fw-bold mb-2">Alfian Mutakim</h1>
+              <h2 className="h3 fw-semibold mb-4">
+                <span className="visually-hidden">{typedRoles[0]}</span>
+                <span className="typed-role" aria-hidden="true">
+                  {typedRole}
+                  <span className="typed-caret"></span>
+                </span>
+              </h2>
+
+              <p className="lead hero-lead mb-4">
+                I build web apps that make everyday work easier, from warehouse
+                management systems to apps for local government. Software
+                Engineering graduate from{" "}
+                <span className="text-white fw-semibold">Telkom University</span>{" "}
+                with a 3.95 GPA. Outside the code, I've hosted campus events as
+                an MC, worked with customers on the sales floor, and led student
+                teams, so I'm just as comfortable talking to people as I am
+                writing code.
+              </p>
+
+              <p className="hero-location mb-4">
+                <i className="bi bi-geo-alt-fill me-1"></i> Karawang, Indonesia
+              </p>
+
+              <div className="d-flex flex-wrap align-items-center gap-3">
+                <Link
+                  to="/contact"
+                  className="btn btn-primary custom-hover custom-rounded fw-bold px-4 py-3"
                 >
-                  Download CV
+                  Let's Talk <i className="bi bi-arrow-right ms-1"></i>
+                </Link>
+                <a
+                  href={cvUrl}
+                  download="CV_Alfian_Mutakim.pdf"
+                  className="btn btn-outline-light custom-rounded fw-bold px-4 py-3"
+                >
+                  <i className="bi bi-download me-2"></i>Download CV
                 </a>
-              </div>
-
-              {/* Kolom Icon Sosial */}
-              <div className="col-auto">
-                <div className="d-flex gap-3 fs-4">
-                  <a
-                    href="https://github.com/alfianmutaqin01"
-                    className="text-white"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <i className="bi bi-github"></i>
-                  </a>
-                  <a
-                    href="www.linkedin.com/in/alfianmutakim"
-                    className="text-white"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <i className="bi bi-linkedin"></i>
-                  </a>
-                  <a
-                    href="https://www.instagram.com/al_fianmutaqin?igsh=MWlyazJrYXptaWEyaQ=="
-                    className="text-white"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <i className="bi bi-instagram"></i>
-                  </a>
-                  <a
-                    href="#"
-                    className="text-white"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <i className="bi bi-arrow-right"></i>
-                  </a>
+                <div className="d-flex gap-3 fs-4 ms-sm-2">
+                  {socialLinks.map(({ href, icon, label }) => (
+                    <a
+                      key={label}
+                      href={href}
+                      className="social-link"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={label}
+                      title={label}
+                    >
+                      <i className={`bi ${icon}`}></i>
+                    </a>
+                  ))}
                 </div>
+              </div>
+            </div>
+
+            <div className="col-lg-5 text-center" data-aos="fade-left">
+              <div className="hero-photo-wrap">
+                <img
+                  src={heroImg}
+                  alt="Alfian Mutakim"
+                  className="hero-photo img-fluid rounded-4 shadow-lg"
+                />
+                <span className="float-badge float-badge-1">
+                  <i className="bi bi-mortarboard-fill"></i> GPA 3.95
+                </span>
+                <span className="float-badge float-badge-2">
+                  <i className="bi bi-code-slash"></i> Laravel · React
+                </span>
+                <span className="float-badge float-badge-3">
+                  <i className="bi bi-mic-fill"></i> MC & Public Speaker
+                </span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* ---------- TECH MARQUEE ---------- */}
+      <section className="py-4">
+        <p className="section-eyebrow text-center mb-4">Tools I work with</p>
+        <div className="overflow-hidden">
+          <div className="tech-marquee d-flex">
+            {[...techStack, ...techStack].map((tech, idx) => (
+              <div
+                key={idx}
+                className="tech-chip rounded-4 mx-3 px-4 py-3 d-flex align-items-center justify-content-center"
+                title={tech.name}
+              >
+                <img
+                  src={tech.logo}
+                  alt={tech.name}
+                  style={{ height: "32px", maxWidth: "100%" }}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ---------- STATS ---------- */}
+      <section className="pt-2 pb-5">
+        <div className="container">
+          <div className="row g-3">
+            {stats.map((stat, i) => (
+              <div
+                className="col-6 col-lg-3"
+                key={stat.label}
+                data-aos="fade-up"
+                data-aos-delay={i * 100}
+              >
+                <div className="stat-card">
+                  <div className="stat-value">
+                    <CountUp
+                      end={stat.value}
+                      decimals={stat.decimals}
+                      prefix={stat.prefix}
+                      suffix={stat.suffix}
+                    />
+                  </div>
+                  <div className="stat-label">{stat.label}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ---------- EDUCATION ---------- */}
+      <section className="py-5">
+        <div className="container">
+          <SectionHeading eyebrow="Education" title="Where I learned the craft" />
+          <div className="edu-card mx-auto" data-aos="fade-up">
+            <div className="row g-0 align-items-center">
+              <div className="col-md-5">
+                <img
+                  src={kampus}
+                  alt="Telkom University Purwokerto campus"
+                  className="edu-image"
+                />
+              </div>
+              <div className="col-md-7 p-4 p-lg-5 text-start">
+                <p className="timeline-date mb-2">{education.date}</p>
+                <h4 className="fw-bold mb-1">{education.institution}</h4>
+                <p className="timeline-company mb-3">
+                  {education.degree} · {education.location}
+                </p>
+                <span className="gpa-pill mb-3">
+                  <i className="bi bi-star-fill me-1"></i> GPA {education.gpa}
+                </span>
+                <p className="timeline-desc mb-0">{education.description}</p>
               </div>
             </div>
           </div>
         </div>
-        <br />
-        <br />
-        <section className="bg-xolio-dark py-5">
-          <div className="overflow-hidden" style={{ width: "100%" }}>
-            <div className="tech-marquee d-flex">
-              {[...techStack, ...techStack].map((tech, idx) => (
-                <div
-                  key={idx}
-                  className="bg-dark rounded-4 mx-3 px-4 py-3 d-flex align-items-center justify-content-center shadow"
-                  style={{ width: "160px", height: "80px", flex: "0 0 auto" }}
-                >
-                  <img
-                    src={tech.logo}
-                    alt={tech.name}
-                    style={{ height: "32px", maxWidth: "100%" }}
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+      </section>
 
-        <br />
-
-        <section>
-          <div className="container text-center">
-            <div className="text-center mb-5">
-              <p className="text-primary fw-semibold mb-2 text-uppercase">
-                Topics of Interest
-              </p>
-              <h2 className="fw-bold">
-                User-Friendly and Purposeful Digital solutions.
-              </h2>
-            </div>
-
-            <div className="row">
-              {/* Card 1: Front-end Development */}
-              <div className="col-md-4 mb-4">
-                <div className="border rounded-4 p-4 shadow-sm h-100 bg-dark text-white">
-                  <div className="mb-3">
-                    <i className="bi bi-code-slash fs-1 text-primary"></i>
+      {/* ---------- EXPERIENCE ---------- */}
+      <section className="py-5">
+        <div className="container">
+          <SectionHeading
+            eyebrow="Experience"
+            title="Where I've been working"
+            lead="From the computer lab to a warehouse system, each role taught me something about building for real users."
+          />
+          <div className="timeline">
+            {experiences.map((exp) => (
+              <div
+                className={`timeline-item ${exp.current ? "is-current" : ""}`}
+                key={`${exp.company}-${exp.date}`}
+                data-aos="fade-up"
+              >
+                <span className="timeline-dot"></span>
+                <div className="timeline-card">
+                  <div className="d-flex flex-wrap justify-content-between align-items-center gap-2">
+                    <span className="timeline-company">
+                      {exp.company} · {exp.location}
+                    </span>
+                    <span className="timeline-date">
+                      {exp.current && <span className="now-badge me-2">Now</span>}
+                      {exp.date}
+                    </span>
                   </div>
-                  <h5 className="fw-bold">Front-end Development</h5>
-                  <p className="text-light">
-                    Building responsive and interactive web interfaces with
-                    clean code and optimized performance.
-                  </p>
-                </div>
-              </div>
-
-              {/* Card 2: Back-end Development */}
-              <div className="col-md-4 mb-4">
-                <div className="border rounded-4 p-4 shadow-sm h-100 bg-dark text-white">
-                  <div className="mb-3">
-                    <i className="bi bi-hdd-stack fs-1 text-primary"></i>
-                  </div>
-                  <h5 className="fw-bold">Back-end Development</h5>
-                  <p className="text-light">
-                    Creating robust server-side logic and database systems that
-                    support scalable applications.
-                  </p>
-                </div>
-              </div>
-
-              {/* Card 3: UI/UX Design */}
-              <div className="col-md-4 mb-4">
-                <div className="border rounded-4 p-4 shadow-sm h-100 bg-dark text-white">
-                  <div className="mb-3">
-                    <i className="bi bi-palette fs-1 text-primary"></i>
-                  </div>
-                  <h5 className="fw-bold">UI/UX Design</h5>
-                  <p className="text-light">
-                    Creating seamless user experiences with attention to
-                    usability and aesthetic clarity.
-                  </p>
-                </div>
-              </div>
-
-              {/* Card 4: System Administration */}
-              <div className="col-md-4 mb-4">
-                <div className="border rounded-4 p-4 shadow-sm h-100 bg-dark text-white">
-                  <div className="mb-3">
-                    <i className="bi bi-gear fs-1 text-primary"></i>
-                  </div>
-                  <h5 className="fw-bold">System Administration</h5>
-                  <p className="text-light">
-                    Managing administrative workflows and digital documentation
-                    for efficiency.
-                  </p>
-                </div>
-              </div>
-
-              {/* Card 5: Writing & Content */}
-              <div className="col-md-4 mb-4">
-                <div className="border rounded-4 p-4 shadow-sm h-100 bg-dark text-white">
-                  <div className="mb-3">
-                    <i className="bi bi-pen fs-1 text-primary"></i>
-                  </div>
-                  <h5 className="fw-bold">Writing & Content</h5>
-                  <p className="text-light">
-                    Producing impactful educational content and concise writing
-                    for media and digital needs.
-                  </p>
-                </div>
-              </div>
-
-              {/* Card 6: Communication */}
-              <div className="col-md-4 mb-4">
-                <div className="border rounded-4 p-4 shadow-sm h-100 bg-dark text-white">
-                  <div className="mb-3">
-                    <i className="bi bi-mic fs-1 text-primary"></i>
-                  </div>
-                  <h5 className="fw-bold">Communication</h5>
-                  <p className="text-light">
-                    Experienced in public speaking, mentoring, and team
-                    collaboration.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        <br />
-        <br />
-        <section className="bg-dark text-white py-5 px-3">
-          <div className="container">
-            {/* Education Header */}
-            <div className="row align-items-center mb-5">
-              <div className="col-md-6 text-center">
-                <img
-                  src={kampus}
-                  alt="Alfian Mutakim"
-                  className="img-fluid w-75"
-                  style={{ maxWidth: "80%" }}
-                />
-              </div>
-              <div className="col-md-6 text-md-start text-center">
-                <p className="text-danger fw-semibold mb-2 text-uppercase">
-                  Education
-                </p>
-                <h2 className="fw-bold mb-3">My Educational History</h2>
-                <p className="text-secondary mb-0">
-                  My educational history and what I have learned.
-                </p>
-              </div>
-            </div>
-
-            {/* Education Timeline */}
-            <div className="row">
-              {educationData.map((edu, index) => (
-                <div className="col-12 mb-5" key={index}>
-                  <div className="p-4 border-start border-4 border-danger bg-secondary bg-opacity-10 rounded shadow-sm">
-                    <h6 className="text-danger mb-1">{edu.date}</h6>
-                    <h5 className="fw-bold text-white">{edu.institution}</h5>
-                    <p className="mb-1 fw-semibold text-white-50">
-                      {edu.degree}
-                    </p>
-                    <p className="text-white-50 mb-0">{edu.details}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="bg-dark text-white py-5">
-          <div className="container">
-            {/* Title */}
-            <div className="text-center mb-5">
-              <i className="bi bi-award fs-1 text-warning animate__animated animate__heartBeat animate__infinite"></i>
-
-              <p className="text-warning fw-semibold mb-2 text-uppercase">
-                What I Achieve
-              </p>
-              <h2 className="fw-bold">Awards & Achievements</h2>
-            </div>
-
-            {/* Cards */}
-            <div className="row g-4 justify-content-center">
-              {achievementData.map((item, index) => (
-                <div className="col-md-3" key={index}>
-                  <div className="text-center p-4 bg-secondary bg-opacity-10 rounded-4 h-100">
-                    <img
-                      src={icons[`../assets/achievements/${item.icon}`]}
-                      alt={item.title}
-                      style={{ height: "40px" }}
-                      className="mb-3"
-                    />
-
-                    <h5 className="fw-bold">{item.title}</h5>
-                    <p className="text-secondary small">{item.description}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="bg-dark text-white py-5">
-          <div className="container text-center">
-            {/* Heading */}
-            <div className="text-center mb-5">
-              <p className="text-primary fw-semibold mb-2 text-uppercase">
-                Experience
-              </p>
-              <h2 className="fw-bold">My Professional Journey</h2>
-            </div>
-
-            {/* Cards */}
-            <div className="row justify-content-center g-4">
-              {combinedExperience[0].entries.map(
-                ({ date, place, role, description }, index) => {
-                  const bgStyles = [
-                    {
-                      className: "bg-black text-white",
-                      style: {
-                        border: "1px solid #111111ff",
-                        background:
-                          "linear-gradient(145deg, #111111ff, #111111ff)",
-                      },
-                    },
-                    {
-                      className: "text-light",
-                      style: {
-                        backgroundColor: "#bd6b0eff",
-                        background:
-                          "linear-gradient(145deg, #bd6b0eff, #bd6b0eff)",
-                      },
-                    },
-                    {
-                      className: "text-white",
-                      style: {
-                        backgroundColor: "#50565cff",
-                        background:
-                          "linear-gradient(145deg, #50565cff, #50565cff)",
-                      },
-                    },
-                    {
-                      className: "text-white",
-                      style: {
-                        backgroundColor: "#34265fff",
-                        background:
-                          "linear-gradient(145deg, #34265fff, #34265fff)",
-                      },
-                    },
-                  ];
-
-                  const { className, style } =
-                    bgStyles[index % bgStyles.length];
-
-                  return (
-                    <div className="col-md-3" key={index}>
-                      <div
-                        className={`p-4 rounded-4 shadow-lg position-relative h-100 ${className} card-shadow card-hover`}
-                        style={{
-                          ...style,
-                          transition: "all 0.3s ease",
-                          minHeight: "360px",
-                        }}
-                      >
-                        {/* Icon + Badge */}
-                        <div className="d-flex justify-content-between align-items-start mb-3">
-                          <i className="bi bi-briefcase-fill fs-3 opacity-75"></i>
-                          <span className="badge bg-light text-dark small">
-                            Experience
-                          </span>
-                        </div>
-
-                        {/* Metadata */}
-                        <p className="mb-1 fw-semibold small fst-italic">
-                          {date} — {place}
-                        </p>
-
-                        {/* Role */}
-                        <h5 className="fw-bold mb-3">{role}</h5>
-
-                        {/* Description */}
-                        <p className="small mb-0" style={{ lineHeight: "1.6" }}>
-                          {description}
-                        </p>
-                      </div>
-                    </div>
-                  );
-                }
-              )}
-            </div>
-          </div>
-        </section>
-
-        <section className="bg-dark text-white py-5">
-          <div className="container">
-            <div className="text-center mb-5">
-              <p className="text-warning fw-semibold mb-2 text-uppercase">
-                Organizational & Volunteer Experience
-              </p>
-              <h2 className="fw-bold">Leadership and Collaboration</h2>
-            </div>
-
-            <div className="d-flex flex-column gap-4">
-              {combinedExperience[1].entries.map(
-                ({ date, place, role, description }, i) => {
-                  const colors = [
-                    "warning",
-                    "info",
-                    "success",
-                    "primary",
-                    "danger",
-                  ];
-                  const color = colors[i % colors.length]; // urutkan bergantian
-
-                  return (
-                    <div
-                      key={i}
-                      className={`p-4 rounded-3 position-relative shadow-sm bg-opacity-10 bg-light border-start border-4 border-${color}`}
-                    >
-                      {/* Badge */}
-                      <span
-                        className={`position-absolute top-0 start-100 translate-middle badge rounded-pill bg-${color} text-dark d-none d-md-inline-block`}
-                        style={{ top: "1rem", left: "auto" }}
-                      >
-                        Org
+                  <h5 className="fw-bold mt-2 mb-2">{exp.role}</h5>
+                  <p className="timeline-desc mb-2">{exp.description}</p>
+                  <div>
+                    {exp.tags.map((tag) => (
+                      <span className="tag" key={tag}>
+                        {tag}
                       </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-                      {/* Meta info */}
-                      <div className={`mb-1 small fw-semibold text-${color}`}>
-                        {date} | {place}
-                      </div>
+      {/* ---------- ACHIEVEMENTS ---------- */}
+      <section className="py-5">
+        <div className="container">
+          <SectionHeading
+            eyebrow="Awards & Achievements"
+            title="A few things I'm proud of"
+          />
+          <div className="row g-4">
+            {achievements.map((item, i) => (
+              <div
+                className="col-md-6 col-lg-4"
+                key={item.title}
+                data-aos="zoom-in"
+                data-aos-delay={(i % 3) * 100}
+              >
+                <div className="achievement-card">
+                  <div className="achievement-icon">
+                    {item.image ? (
+                      <img
+                        src={achievementImages[`../assets/achievements/${item.image}`]}
+                        alt=""
+                      />
+                    ) : (
+                      <i className={`bi ${item.icon}`}></i>
+                    )}
+                  </div>
+                  <div className="text-start">
+                    <span className="achievement-badge">{item.badge}</span>
+                    <h5 className="fw-bold mt-2 mb-1">{item.title}</h5>
+                    <p className="achievement-issuer mb-2">{item.issuer}</p>
+                    <p className="timeline-desc small mb-0">{item.description}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-                      {/* Title */}
-                      <h5 className="fw-semibold text-white mb-2">{role}</h5>
+      {/* ---------- ORGANIZATIONS ---------- */}
+      <section className="py-5">
+        <div className="container">
+          <SectionHeading
+            eyebrow="Beyond Work"
+            title="Leadership & community"
+            lead="Leading teams, hosting events, and mentoring other students taught me as much as any course did."
+          />
+          <div className="row g-4">
+            {organizations.map((org, i) => (
+              <div
+                className="col-md-6"
+                key={org.role}
+                data-aos="fade-up"
+                data-aos-delay={(i % 2) * 100}
+              >
+                <div className="org-card">
+                  <p className="timeline-date mb-1">{org.date}</p>
+                  <h5 className="fw-bold mb-1">{org.role}</h5>
+                  <p className="timeline-company mb-2">{org.org}</p>
+                  <p className="timeline-desc small mb-0">{org.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-                      {/* Description */}
-                      <p className="text-white-50 mb-0">{description}</p>
-                    </div>
-                  );
-                }
-              )}
+      {/* ---------- WHAT I DO ---------- */}
+      <section className="py-5">
+        <div className="container">
+          <SectionHeading
+            eyebrow="Hard Skills"
+            title="Turning real workflows into reliable web apps"
+            lead="I like working where code meets day-to-day operations: understanding how people actually work, then building something that helps."
+          />
+          <div className="row g-4">
+            {services.map((service, i) => (
+              <div
+                className="col-md-6 col-lg-4"
+                key={service.title}
+                data-aos="fade-up"
+                data-aos-delay={(i % 3) * 100}
+              >
+                <div className="feature-card">
+                  <div className="feature-icon">
+                    <i className={`bi ${service.icon}`}></i>
+                  </div>
+                  <h5 className="fw-bold">{service.title}</h5>
+                  <p>{service.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ---------- SOFT SKILLS ---------- */}
+      <section className="py-5">
+        <div className="container">
+          <SectionHeading
+            eyebrow="Soft Skills"
+            title="The people side of the job"
+            lead="Good software starts with understanding people. These are the skills I bring to the table besides code, each one learned on the job."
+          />
+          <SoftSkillGrid />
+          <div className="text-center mt-4" data-aos="fade-up">
+            <Link to="/skills#on-the-mic" className="soft-link">
+              <Equalizer /> See me on the mic <i className="bi bi-arrow-right"></i>
+            </Link>
+          </div>
+        </div>
+        <div className="mt-5">
+          <SoftSkillMarquee />
+        </div>
+      </section>
+
+      {/* ---------- CALL TO ACTION ---------- */}
+      <section className="py-5">
+        <div className="container">
+          <div className="cta-box text-center" data-aos="zoom-in">
+            <h2 className="fw-bold mb-3">
+              Got a project or a role in mind? <span className="wave">👋</span>
+            </h2>
+            <p className="section-lead mb-4">
+              I'm always happy to chat about web development, business systems,
+              or new opportunities. Drop me a message and let's see what we can
+              build together. (And yes, I can host your next event too 🎤)
+            </p>
+            <div className="d-flex flex-wrap justify-content-center gap-3">
+              <Link
+                to="/contact"
+                className="btn btn-primary custom-hover custom-rounded fw-bold px-4 py-3"
+              >
+                Say Hello <i className="bi bi-send-fill ms-1"></i>
+              </Link>
+              <a
+                href={`mailto:${contact.email}`}
+                className="btn btn-outline-light custom-rounded fw-bold px-4 py-3"
+              >
+                <i className="bi bi-envelope-fill me-2"></i>
+                {contact.email}
+              </a>
             </div>
           </div>
-        </section>
-      </div>
-
-      {/* Decorative floating shapes ala Xolio (optional) */}
-      <span
-        className="position-absolute bottom-0 end-0 text-warning fs-1 bounce-horizontal"
-        style={{ opacity: 0.3, pointerEvents: "none" }}
-      >
-        ✨
-      </span>
-    </section>
+        </div>
+      </section>
+    </div>
   );
 }
 

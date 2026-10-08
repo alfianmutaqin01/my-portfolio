@@ -1,0 +1,359 @@
+/* Styles shared by Home and Skills */
+
+.section-eyebrow {
+  color: var(--highlight);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.section-lead {
+  max-width: 640px;
+  margin: 0 auto;
+  color: var(--muted);
+}
+
+/* ---------- Soft skills ---------- */
+.soft-card {
+  height: 100%;
+  padding: 1.75rem;
+  border-radius: 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  text-align: left;
+  transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+}
+
+.soft-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(255, 193, 7, 0.45);
+  background: rgba(255, 193, 7, 0.06);
+}
+
+.soft-icon {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 1rem;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #ffc107, #fd7e14);
+  color: #212529;
+  font-size: 1.35rem;
+}
+
+.soft-card:hover .soft-icon {
+  animation: wiggle 0.6s ease-in-out;
+}
+
+@keyframes wiggle {
+  0%,
+  100% {
+    transform: rotate(0deg) scale(1);
+  }
+  25% {
+    transform: rotate(-12deg) scale(1.1);
+  }
+  50% {
+    transform: rotate(10deg) scale(1.1);
+  }
+  75% {
+    transform: rotate(-6deg) scale(1.05);
+  }
+}
+
+.soft-desc {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.soft-proof {
+  display: inline-block;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(255, 193, 7, 0.12);
+  color: var(--highlight);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.soft-link {
+  color: var(--highlight);
+  font-weight: 600;
+  transition: gap 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.soft-link:hover {
+  color: var(--highlight);
+  gap: 0.75rem;
+}
+
+.skill-chip {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  padding: 0.7rem 1.3rem;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid rgba(255, 193, 7, 0.3);
+  color: #fff;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.skill-chip i {
+  color: var(--highlight);
+}
+
+.marquee-reverse {
+  animation-direction: reverse;
+  animation-duration: 40s;
+}
+
+/* ---------- Sound equalizer ---------- */
+.equalizer {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 18px;
+}
+
+.equalizer span {
+  width: 3px;
+  height: 100%;
+  border-radius: 2px;
+  background: currentColor;
+  transform-origin: bottom;
+  animation: equalize 1s ease-in-out infinite;
+}
+
+.equalizer span:nth-child(2) {
+  animation-delay: -0.4s;
+}
+
+.equalizer span:nth-child(3) {
+  animation-delay: -0.2s;
+}
+
+.equalizer span:nth-child(4) {
+  animation-delay: -0.7s;
+}
+
+.equalizer span:nth-child(5) {
+  animation-delay: -0.5s;
+}
+
+@keyframes equalize {
+  0%,
+  100% {
+    transform: scaleY(0.3);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+/* ---------- MC gallery ---------- */
+.mc-card {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  border-radius: 1.25rem;
+  border: 1px solid var(--surface-border);
+  background: linear-gradient(135deg, rgba(132, 94, 247, 0.35), rgba(253, 126, 20, 0.25));
+  color: #fff;
+  text-align: left;
+}
+
+button.mc-card {
+  cursor: zoom-in;
+}
+
+.mc-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.mc-card:hover img {
+  transform: scale(1.08);
+}
+
+.mc-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding-bottom: 4rem;
+  color: var(--highlight);
+}
+
+.mc-placeholder .bi {
+  font-size: 2.75rem;
+  color: #fff;
+  animation: mic-bob 3s ease-in-out infinite;
+}
+
+@keyframes mic-bob {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-6deg);
+  }
+  50% {
+    transform: translateY(-6px) rotate(6deg);
+  }
+}
+
+.mc-caption {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 2.5rem 1.1rem 1rem;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.85));
+}
+
+.mc-type {
+  display: inline-block;
+  margin-bottom: 0.4rem;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  background: var(--highlight);
+  color: #212529;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.mc-type.is-casual {
+  background: #20c997;
+}
+
+.mc-title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.mc-meta {
+  margin: 0.15rem 0 0;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.82rem;
+}
+
+/* ---------- Filter ---------- */
+.filter-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1.1rem;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.filter-pill:hover {
+  border-color: var(--accent-border);
+}
+
+.filter-pill.is-active {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.filter-count {
+  min-width: 1.4rem;
+  padding: 0 0.4rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.15);
+  font-size: 0.75rem;
+}
+
+/* ---------- Lightbox ---------- */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: rgba(0, 0, 0, 0.88);
+  animation: fade-in 0.25s ease;
+}
+
+.lightbox img {
+  max-width: min(1000px, 100%);
+  max-height: 78vh;
+  border-radius: 1rem;
+  object-fit: contain;
+}
+
+.lightbox-caption {
+  margin-top: 1rem;
+  color: #fff;
+  text-align: center;
+}
+
+.lightbox-action {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 0.75rem;
+  padding: 0.5rem 1.1rem;
+  border-radius: 999px;
+  background: var(--highlight);
+  color: #212529;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.lightbox-action:hover {
+  color: #212529;
+  filter: brightness(1.1);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  font-size: 1.25rem;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .soft-card,
+  .soft-card *,
+  .mc-card *,
+  .equalizer span,
+  .lightbox {
+    animation: none !important;
+    transition: none !important;
+  }
+}

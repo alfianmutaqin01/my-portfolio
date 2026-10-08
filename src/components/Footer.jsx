@@ -10,7 +10,7 @@ function Footer() {
 
         {/* Deskripsi Singkat */}
         <p className="text-light small mb-4">
-          A passionate Software Engineering student crafting real-world solutions through code, design, and collaboration.
+          Web Developer and Software Engineering graduate who builds practical web apps and enjoys working with the people who use them.
         </p>
 
         {/* Garis Pemisah */}
@@ -35,7 +35,7 @@ function Footer() {
               <i className="bi bi-whatsapp"></i>
             </a>
             <a
-              href="https://www.instagram.com/al_fianmutaqin?igsh=MWlyazJrYXptaWEyaQ=="
+              href="https://www.instagram.com/al_fianmutaqin?stkn=MWlyazJrYXptaWEyaQ%3D%3D&utm_source=qr"
               target="_blank"
               rel="noopener noreferrer"
               className="text-danger fs-5"
@@ -60,6 +60,15 @@ function Footer() {
               title="GitHub"
             >
               <i className="bi bi-github"></i>
+            </a>
+            <a
+              href="https://www.tiktok.com/@al_00209"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-light fs-5"
+              title="TikTok"
+            >
+              <i className="bi bi-tiktok"></i>
             </a>
           </div>
         </div>

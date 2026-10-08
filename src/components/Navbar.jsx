@@ -1,7 +1,19 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { NavLink, Link } from "react-router-dom";
 import heroImg from "../assets/name.png";
 
+const menuItems = [
+  { to: "/home", label: "Home" },
+  { to: "/projects", label: "Projects" },
+  { to: "/skills", label: "Skills" },
+  { to: "/certification", label: "Certification" },
+  { to: "/contact", label: "Contact" },
+];
+
 function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
+  const closeMenu = () => setIsOpen(false);
+
   return (
     <nav
       className="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm sticky-top"
@@ -11,7 +23,11 @@ function Navbar() {
       }}
     >
       <div className="container">
-        <Link to="/home" className="nav-link d-flex align-items-center gap-2">
+        <Link
+          to="/home"
+          className="nav-link d-flex align-items-center gap-2"
+          onClick={closeMenu}
+        >
           <img
             src={heroImg}
             alt="Name"
@@ -21,38 +37,25 @@ function Navbar() {
         <button
           className="navbar-toggler"
           type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded={isOpen}
+          aria-label="Toggle navigation"
+          onClick={() => setIsOpen(!isOpen)}
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
+        <div
+          className={`collapse navbar-collapse ${isOpen ? "show" : ""}`}
+          id="navbarNav"
+        >
           <ul className="navbar-nav ms-auto">
-            <li className="nav-item">
-              <Link className="nav-link" to="/home">
-                Home
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/projects">
-                projects
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/skills">
-                Skills
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/certification">
-                Certification
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/contact">
-                Contact
-              </Link>
-            </li>
+            {menuItems.map(({ to, label }) => (
+              <li className="nav-item" key={to}>
+                <NavLink className="nav-link" to={to} onClick={closeMenu}>
+                  {label}
+                </NavLink>
+              </li>
+            ))}
           </ul>
         </div>
       </div>
