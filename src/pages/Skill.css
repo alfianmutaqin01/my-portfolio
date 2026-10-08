@@ -1,0 +1,93 @@
+.skills-page {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Keep anchored sections clear of the sticky navbar */
+.skills-anchor {
+  scroll-margin-top: 70px;
+}
+
+.jump-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.55rem 1.1rem;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+}
+
+.jump-pill:hover {
+  color: #fff;
+  border-color: var(--accent-border);
+  background: var(--accent-soft);
+  transform: translateY(-2px);
+}
+
+.tool-group {
+  height: 100%;
+  padding: 1.75rem;
+  border-radius: 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  text-align: left;
+  transition: border-color 0.3s ease;
+}
+
+.tool-group:hover {
+  border-color: var(--accent-border);
+}
+
+.tool-group-icon {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 1.2rem;
+}
+
+.tool-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.4rem 0.9rem 0.4rem 0.4rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--surface-border);
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.tool-item:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent-border);
+}
+
+.tool-logo {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.tool-logo img {
+  max-width: 20px;
+  max-height: 20px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jump-pill,
+  .tool-item {
+    transition: none;
+  }
+}
