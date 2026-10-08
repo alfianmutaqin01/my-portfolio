@@ -1,19 +1,223 @@
-.contact-section input,
-.contact-section textarea {
-  background-color: #2a2a2a;
+.contact-page {
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-wave {
+  display: inline-block;
+  transform-origin: 70% 70%;
+  animation: contact-wave 2.5s ease-in-out infinite;
+}
+
+@keyframes contact-wave {
+  0%,
+  60%,
+  100% {
+    transform: rotate(0deg);
+  }
+  10%,
+  30% {
+    transform: rotate(14deg);
+  }
+  20% {
+    transform: rotate(-8deg);
+  }
+  40% {
+    transform: rotate(-4deg);
+  }
+  50% {
+    transform: rotate(10deg);
+  }
+}
+
+.contact-card {
+  padding: 1.75rem;
+  border-radius: 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+}
+
+.contact-muted {
+  color: var(--muted);
+}
+
+.contact-label {
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ---------- Form ---------- */
+.topic-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  background: transparent;
+  border: 1px solid var(--surface-border);
   color: #fff;
-  border: 1px solid #444;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease,
+    transform 0.2s ease;
 }
 
-.contact-section input::placeholder,
-.contact-section textarea::placeholder {
-  color: #bbb;
+.topic-chip:hover {
+  border-color: var(--accent-border);
+  transform: translateY(-2px);
 }
 
-.contact-section input:focus,
-.contact-section textarea:focus {
-  border-color: #ffc107;
-  background-color: #222;
-  outline: none;
-  box-shadow: none;
+.topic-chip.is-active {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.contact-input {
+  padding: 0.85rem 1rem;
+  border-radius: 0.85rem;
+  background-color: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+
+.contact-input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.contact-input:focus {
+  background-color: rgba(0, 0, 0, 0.35);
+  border-color: var(--highlight);
+  color: #fff;
+  box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.15);
+}
+
+.contact-error {
+  padding: 0.85rem 1rem;
+  border-radius: 0.85rem;
+  background: rgba(220, 53, 69, 0.15);
+  border: 1px solid rgba(220, 53, 69, 0.4);
+  color: #ffb3bb;
+  font-size: 0.9rem;
+}
+
+.contact-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-height: 420px;
+  text-align: center;
+  animation: success-in 0.4s ease;
+}
+
+.success-icon {
+  display: grid;
+  place-items: center;
+  width: 80px;
+  height: 80px;
+  margin-bottom: 1.25rem;
+  border-radius: 50%;
+  background: rgba(32, 201, 151, 0.15);
+  color: #20c997;
+  font-size: 2.5rem;
+  animation: success-pop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes success-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+@keyframes success-pop {
+  from {
+    transform: scale(0);
+  }
+}
+
+.contact-ghost {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.contact-ghost:hover {
+  background: var(--highlight);
+  border-color: var(--highlight);
+  color: #212529;
+}
+
+/* ---------- Direct contact ---------- */
+.contact-email {
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 700;
+  word-break: break-all;
+}
+
+.contact-email:hover {
+  color: var(--highlight);
+}
+
+.channel-link {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem;
+  border-radius: 1rem;
+  color: #fff;
+  transition: background 0.2s ease;
+}
+
+.channel-link:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.channel-icon {
+  display: grid;
+  place-items: center;
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--channel-color) 18%, transparent);
+  color: var(--channel-color);
+  font-size: 1.25rem;
+  transition: transform 0.2s ease;
+}
+
+.channel-link:hover .channel-icon {
+  transform: scale(1.1) rotate(-6deg);
+}
+
+.channel-arrow {
+  color: var(--muted);
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.channel-link:hover .channel-arrow {
+  color: var(--highlight);
+  transform: translate(3px, -3px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-page *,
+  .contact-page *::before,
+  .contact-page *::after {
+    animation: none !important;
+    transition: none !important;
+  }
 }
