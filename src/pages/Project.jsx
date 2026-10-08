@@ -1,117 +1,277 @@
-import React from "react";
-import { useEffect } from "react";
-import AOS from "aos";
-import "aos/dist/aos.css";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import SectionHeading from "../components/SectionHeading";
+import { projects, projectCategories } from "../data/projects";
 import "./Project.css";
-import alfathoniyyah from "../assets/alfathoniyyah.png";
-import portofolio from "../assets/portofolio.png";
-import eco from "../assets/eco.jpg";
-import nukertrash from "../assets/nukertrash.png";
-import nukertrash2 from "../assets/nukertrash2.png";
-import esheep from "../assets/esheep.png";
-import pringgading from "../assets/pringgading.png";
-import komdaham from "../assets/komdaham.png";
-import srs from "../assets/srs.png";
 
-const projectData = [
-  {
-    title: "Nukertrash",
-    subtitle: "Code Mobile App",
-    image: nukertrash2,
-    link: "https://github.com/alfianmutaqin01/Nukertrash",
-  },
-  {
-    title: "Portofolio Alfian",
-    subtitle: "Portofolio Pribadi",
-    image: portofolio,
-    link: "https://alfianmutaqin01.github.io/Protofolio.github.io/",
-  },
-  {
-    title: "Esheep",
-    subtitle: "UI/UX Mobile App Farm",
-    image: esheep,
-    link: "https://www.figma.com/design/pQSEfOB9qwshsTJwIFuSQD/E-Sheep?node-id=525-326&p=f&t=qFynBF8azUequ4hP-0",
-  },
-  {
-    title: "Komdaham Kab. Wonosobo",
-    subtitle: "Website Management Komdaham",
-    image: komdaham,
-    link: "https://github.com/alfianmutaqin01/KOMNASHAM",
-  },
-  {
-    title: "Al-Fathoniyyah",
-    subtitle: "Website Profil Sekolah",
-    image: alfathoniyyah,
-    link: "https://alfathoniyyah.rumah-al.com/",
-  },
-  {
-    title: "Restaurant Pringgading",
-    subtitle: " UI/UX Web RM. Pringgading",
-    image: pringgading,
-    link: "https://www.figma.com/design/SDencdlxvX7mxuej4E69i6/Untitled?node-id=426-353&t=pbFUR6CDHcreJmi0-0",
-  },
-  {
-    title: "SRS dan SDD Document",
-    subtitle: "Dokumentasi Proyek",
-    image: srs,
-    link: "https://drive.google.com/drive/folders/1-Z2V_vqO7Tl-dCpOvBXLBFJyFhr2Vcx_?usp=sharing",
-  },
-  {
-    title: "Echo Weather",
-    subtitle: "UI/UX Aplikasi Cuaca Lokal",
-    image: eco,
-    link: "https://www.figma.com/design/lIOnl6g7q3TdZFeByTx32K/eco-weather?t=8gIIyC421jWu9doS-0",
-  },
-  {
-    title: "Nukertrash",
-    subtitle: "UI/UX Mobile App Trash",
-    image: nukertrash,
-    link: "https://www.figma.com/design/he2Cc27uk5fx502hrlwrGz/NUKERTRASH?node-id=0-1&p=f&t=rLujUbf2aE2rZCV5-0",
-  }
+const images = import.meta.glob("../assets/projects/*.{png,jpg,jpeg,webp}", {
+  eager: true,
+  query: "?url",
+  import: "default",
+});
+
+const imageUrl = (fileName) => fileName && images[`../assets/projects/${fileName}`];
+
+const linkTypes = [
+  { key: "live", label: "Live Site", icon: "bi-box-arrow-up-right" },
+  { key: "code", label: "Code", icon: "bi-github" },
+  { key: "design", label: "Figma", icon: "bi-vector-pen" },
+  { key: "docs", label: "Docs", icon: "bi-file-earmark-text" },
 ];
 
-function Project() {
-  useEffect(() => {
-    AOS.init({ once: true, duration: 800 });
-  }, []);
+const categoryLabel = Object.fromEntries(
+  projectCategories.map(({ id, label }) => [id, label])
+);
 
+const featuredProjects = projects.filter((p) => p.featured);
+const otherProjects = projects.filter((p) => !p.featured);
+
+function ProjectArt({ project }) {
+  const src = imageUrl(project.image);
+
+  if (src) {
+    return <img src={src} alt={project.title} className="project-image" loading="lazy" />;
+  }
+
+  // Illustrated app window for projects without a screenshot
   return (
-    <section className="bg-dark text-white py-5">
-      <div className="container text-center">
-        <p className="text-warning fw-bold mb-1">Portfolio</p>
-        <h2 className="fw-bold display-5 mb-4">
-          UI/UX and Application Design
-        </h2>
-        <p className="text-light mb-4">
-          Some recent work that showcases creativity, detail, and function.
-        </p>
-
-        {/* Grid */}
-        <div className="row g-4">
-          {projectData.map((project, i) => (
-            <div className="col-sm-6 col-lg-4" key={i}>
-              <a
-                href={project.link}
-                className="project-card d-block position-relative overflow-hidden rounded-4"
-                target="_blank"
-                rel="noopener noreferrer"
-                data-aos="zoom-in"
-              >
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="img-fluid w-100 rounded-4"
-                />
-                <div className="project-overlay text-start p-3">
-                  <h5 className="fw-bold mb-1">{project.title}</h5>
-                  <p className="small mb-0">{project.subtitle}</p>
-                </div>
-              </a>
-            </div>
-          ))}
+    <div className="project-art" aria-hidden="true">
+      <div className="art-window">
+        <div className="art-bar">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div className="art-body">
+          <i className={`bi ${project.icon || "bi-window"}`}></i>
+          <div className="art-lines">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
         </div>
       </div>
-    </section>
+    </div>
+  );
+}
+
+function ProjectLinks({ project }) {
+  const links = linkTypes.filter(({ key }) => project.links?.[key]);
+
+  if (links.length === 0) {
+    return project.note ? (
+      <p className="project-note mb-0">
+        <i className="bi bi-lock-fill me-2"></i>
+        {project.note}
+      </p>
+    ) : null;
+  }
+
+  return (
+    <div className="d-flex flex-wrap gap-2">
+      {links.map(({ key, label, icon }) => (
+        <a
+          key={key}
+          href={project.links[key]}
+          className="project-link"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <i className={`bi ${icon} me-2`}></i>
+          {label}
+        </a>
+      ))}
+    </div>
+  );
+}
+
+function ProjectMeta({ project }) {
+  return (
+    <div className="d-flex flex-wrap align-items-center gap-2 mb-2">
+      {project.status && (
+        <span className="project-status">
+          <span className="status-pulse"></span>
+          {project.status}
+        </span>
+      )}
+      <span className="project-category">{categoryLabel[project.category]}</span>
+      {project.year && <span className="project-year">{project.year}</span>}
+    </div>
+  );
+}
+
+function FeaturedProject({ project, index }) {
+  const reversed = index % 2 === 1;
+
+  return (
+    <article className="featured-card" data-aos="fade-up">
+      <div className="row g-0 align-items-stretch">
+        <div className={`col-lg-6 featured-media ${reversed ? "order-lg-2" : ""}`}>
+          <ProjectArt project={project} />
+        </div>
+        <div className="col-lg-6 p-4 p-lg-5 text-start">
+          <ProjectMeta project={project} />
+          <p className="project-context mb-1">{project.context}</p>
+          <h3 className="fw-bold mb-3">{project.title}</h3>
+          <p className="project-summary">{project.summary}</p>
+          {project.highlights && (
+            <ul className="project-highlights">
+              {project.highlights.map((item) => (
+                <li key={item}>
+                  <i className="bi bi-check2-circle"></i>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          )}
+          <div className="mb-4">
+            {project.tags.map((tag) => (
+              <span className="project-tag" key={tag}>
+                {tag}
+              </span>
+            ))}
+          </div>
+          <ProjectLinks project={project} />
+        </div>
+      </div>
+    </article>
+  );
+}
+
+function ProjectCard({ project }) {
+  return (
+    <article className="project-card">
+      <div className="project-card-media">
+        <ProjectArt project={project} />
+      </div>
+      <div className="p-4 d-flex flex-column flex-grow-1 text-start">
+        <ProjectMeta project={project} />
+        <h5 className="fw-bold mb-1">{project.title}</h5>
+        <p className="project-context small mb-2">{project.context}</p>
+        <p className="project-summary small flex-grow-1">{project.summary}</p>
+        <div className="mb-3">
+          {project.tags.map((tag) => (
+            <span className="project-tag" key={tag}>
+              {tag}
+            </span>
+          ))}
+        </div>
+        <ProjectLinks project={project} />
+      </div>
+    </article>
+  );
+}
+
+function Project() {
+  const [filter, setFilter] = useState("all");
+
+  const visible =
+    filter === "all"
+      ? otherProjects
+      : otherProjects.filter((p) => p.category === filter);
+
+  const countFor = (id) =>
+    id === "all"
+      ? otherProjects.length
+      : otherProjects.filter((p) => p.category === id).length;
+
+  return (
+    <div className="projects-page text-white">
+      {/* ---------- HEADER ---------- */}
+      <section className="pt-5 pb-4">
+        <div className="container text-center" data-aos="fade-up">
+          <p className="section-eyebrow mb-2">Projects</p>
+          <h1 className="display-5 fw-bold mb-3">Things I've built and designed</h1>
+          <p className="section-lead">
+            Real systems for real users, plus the UI/UX work and documentation
+            behind them.
+          </p>
+        </div>
+      </section>
+
+      {/* ---------- LATEST WORK ---------- */}
+      <section className="py-5">
+        <div className="container">
+          <SectionHeading
+            eyebrow="Latest Work"
+            title="What I've been building lately"
+            lead="Production systems for a company, a university, and a local community."
+          />
+          <div className="d-flex flex-column gap-4">
+            {featuredProjects.map((project, i) => (
+              <FeaturedProject project={project} index={i} key={project.title} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ---------- MORE PROJECTS ---------- */}
+      <section className="py-5">
+        <div className="container">
+          <SectionHeading
+            eyebrow="More Projects"
+            title="Apps, designs, and documents"
+          />
+
+          <div
+            className="d-flex flex-wrap justify-content-center gap-2 mb-5"
+            role="tablist"
+            aria-label="Filter projects"
+          >
+            {projectCategories.map(({ id, label }) => {
+              const count = countFor(id);
+              if (count === 0) return null;
+
+              return (
+                <button
+                  key={id}
+                  type="button"
+                  role="tab"
+                  aria-selected={filter === id}
+                  className={`filter-pill ${filter === id ? "is-active" : ""}`}
+                  onClick={() => setFilter(id)}
+                >
+                  {label}
+                  <span className="filter-count">{count}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          <div className="row g-4" key={filter}>
+            {visible.map((project, i) => (
+              <div
+                className="col-md-6 col-lg-4 project-enter"
+                key={project.title}
+                style={{ animationDelay: `${i * 70}ms` }}
+              >
+                <ProjectCard project={project} />
+              </div>
+            ))}
+
+            {filter === "all" && (
+              <div
+                className="col-md-6 col-lg-4 project-enter"
+                style={{ animationDelay: `${visible.length * 70}ms` }}
+              >
+                <div className="coming-card">
+                  <div className="coming-icon">
+                    <i className="bi bi-hourglass-split"></i>
+                  </div>
+                  <h5 className="fw-bold mb-2">More on the way</h5>
+                  <p className="project-summary small mb-4">
+                    New projects are in progress and will show up here soon.
+                  </p>
+                  <Link to="/contact" className="project-link">
+                    <i className="bi bi-chat-dots me-2"></i>Got one in mind?
+                  </Link>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }
 
